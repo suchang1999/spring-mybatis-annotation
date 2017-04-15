@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+
+	
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+		
+		<!-- 延迟加载 -->
+		<!-- lazyLoadingEnabled 开启延迟加载 -->
+		<!-- aggressiveLazyLoading 将关联对象加载方式修改为消极加载 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+
+	<!-- 给类取别名 -->
+	<typeAliases>
+		<package name="org.framestudy.spring_mybatis.usermag.beans"/>
+		<package name="org.framestudy.spring_mybatis.relationmag.beans"/>
+	</typeAliases>
+
+
+	
+	<!-- 数据库的链接环境，mybatis会给每一个环境产生一个对应的数据库连接池 -->
+	<environments default="01">
+		<environment id="01">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="org.gjt.mm.mysql.Driver"/>
+				<!-- &amp;是&符号的转义 xml文件中必须使用转义符 &amp; -->
+				<property name="url" value="jdbc:mysql://localhost:3306/spring-mybatis?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true"/>
+				<property name="username" value="root"/>
+				<property name="password" value="admin"/>				
+				
+			</dataSource>				
+		</environment>	
+	</environments>
+	
+	<!-- SQL映射器 -->
+	<mappers>
+		<!--方式一：定义配置文件的路径，单独告知SQL映射器
+			缺点：如果领域对象过多，维护很困难
+		-->
+		<!-- <mapper resource="/spring-mybatis/src/main/java/org/framestudy/spring_mybatis/usermag/mapper/UserMapper.xml"/> -->
+		
+		<!-- 方式二：批量扫描SQL映射器 只需要定义包的路径 -->
+		<package name="org.framestudy.spring_mybatis.usermag.mapper"/>
+		<package name="org.framestudy.spring_mybatis.relationmag.mapper"/>
+	</mappers>
+	
+	
+	
+	
+	
+	
+</configuration>

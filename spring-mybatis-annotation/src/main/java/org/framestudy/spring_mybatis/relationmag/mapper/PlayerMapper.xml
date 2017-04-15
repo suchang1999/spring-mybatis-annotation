@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.framestudy.spring_mybatis.relationmag.mapper.PlayerMapper">
+	
+
+	<insert id="playerChoiceGames">
+		insert into t_player_game (fk_player_game, fk_game_player) values 
+		<foreach collection="games" item="game" separator=",">
+			(#{player.id},#{game.id})
+		</foreach>
+	</insert>
+
+
+</mapper>
